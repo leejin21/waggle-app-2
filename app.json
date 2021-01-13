@@ -1,0 +1,12 @@
+{
+  "name": "waggle2",
+  "displayName": "waggle2",
+  "expo": {
+    "name": "waggle2",
+    "slug": "waggle2",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
