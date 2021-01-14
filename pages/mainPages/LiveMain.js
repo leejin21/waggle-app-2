@@ -1,16 +1,16 @@
 import React from "react";
 import { View, StyleSheet, FlatList, Dimensions, Text } from "react-native";
 
-import Color from "../../constants/Color"
+import Color from "../../constants/Color";
 import CommonStyles from "../../constants/CommonStyle";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const PageName = (props) => {
-    props.navigation.setOptions({
-    
-    });
+    // props.navigation.setOptions({
+
+    // });
 
     return (
         <View>
@@ -19,7 +19,6 @@ const PageName = (props) => {
     );
 };
 
-const styles = StyleSheet.create({
-});
+const styles = StyleSheet.create({});
 
 export default PageName;
