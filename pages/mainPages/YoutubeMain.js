@@ -1,5 +1,5 @@
 // TODO: look up to "SectionList" component
-
+//////////////////////////////////////////////////////////////////////////
 import React, { useEffect } from "react";
 import {
     View,
@@ -11,13 +11,15 @@ import {
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { color } from "react-native-reanimated";
-
-import ListPhoto from "../../components/ListPhoto";
+//////////////////////////////////////////////////////////////////////////
 
 import Color from "../../constants/Color";
-import MainNavOptions from "../../components/MainNavOptions";
-
 import CommonStyles from "../../constants/CommonStyle";
+
+import MainNavOptions from "../../components/MainNavOptions";
+import ListPhoto from "../../components/ListPhoto";
+import SubHeader from "../../components/SubHeader";
+//////////////////////////////////////////////////////////////////////////
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -28,29 +30,6 @@ const imageDatas = [
     { name: "치킨", hoto: require("../../constants/chicken.jpg") },
 ];
 
-const SubHeader = (props) => {
-    return (
-        <View
-            style={{
-                width: windowWidth,
-                height: windowHeight / 12,
-                alignItems: "flex-start",
-                paddingLeft: 20,
-                justifyContent: "center",
-                backgroundColor: "white",
-            }}
-        >
-            <Text style={{ fontFamily: "noto_regular", fontSize: 17 }}>
-                {props.smallTxt}
-            </Text>
-            <Text
-                style={{ fontFamily: "noto_bold", fontSize: 24, color: "red" }}
-            >
-                #{props.hashTxt}
-            </Text>
-        </View>
-    );
-};
 const VideoList = (props) => {
     return (
         <FlatList
