@@ -13,6 +13,7 @@ import ListPhoto from "../components/ListPhoto";
 const windowWidth = Dimensions.get("window").width;
 
 const VideoList = (props) => {
+    // props: style, imageDatas, width_divider, navigation, png
     return (
         <FlatList
             style={props.style}

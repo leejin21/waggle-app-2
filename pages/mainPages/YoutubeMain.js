@@ -8,6 +8,7 @@ import {
     Dimensions,
     Text,
     Image,
+    SectionList,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { color } from "react-native-reanimated";
@@ -31,23 +32,23 @@ const imageDatas = [
     { id: 3, name: "치킨", hoto: require("../../assets/images/chicken.jpg") },
 ];
 
-// SubHeader + VideoList = SubSection
-const SubSection = (props) => {
-    return (
-        <View>
-            <SubHeader
-                smallTxt={props.smallTxt}
-                hashTxt={props.hashTxt}
-            ></SubHeader>
-            <VideoList
-                navigation={props.navigation}
-                imageDatas={imageDatas}
-                width_divider={2.3}
-                style={{}}
-            ></VideoList>
-        </View>
-    );
-};
+const SECTIONS = [
+    {
+        smallTxt: "우리 주변 숨겨진",
+        hashTxt: "지역맛집",
+        data: imageDatas,
+    },
+    {
+        smallTxt: "매운 음식이 땡길때",
+        hashTxt: "매운음식 맛집",
+        data: imageDatas,
+    },
+    {
+        smallTxt: "우리 주변 숨겨진",
+        hashTxt: "지역맛집",
+        data: imageDatas,
+    },
+];
 
 // Page component
 const YoutubeMain = (props) => {
@@ -56,23 +57,28 @@ const YoutubeMain = (props) => {
     }, []);
 
     return (
-        <ScrollView>
-            <SubSection
-                navigation={props.navigation}
-                smallTxt={"우리 주변 숨겨진"}
-                hashTxt={"지역맛집"}
-            ></SubSection>
-            <SubSection
-                navigation={props.navigation}
-                smallTxt={"매운 음식이 땡길때"}
-                hashTxt={"매운음식 맛집"}
-            ></SubSection>
-            <SubSection
-                navigation={props.navigation}
-                smallTxt={"우리 주변 숨겨진"}
-                hashTxt={"지역맛집"}
-            ></SubSection>
-        </ScrollView>
+        <SectionList
+            sections={SECTIONS}
+            renderSectionHeader={({ section }) => (
+                <>
+                    <SubHeader
+                        smallTxt={section.smallTxt}
+                        hashTxt={section.hashTxt}
+                    ></SubHeader>
+                    <VideoList
+                        imageDatas={section.data}
+                        style={{}}
+                        navigation={props.navigation}
+                        width_divider={2.3}
+                    ></VideoList>
+                </>
+            )}
+            stickySectionHeadersEnabled={false}
+            renderItem={({ item, section }) => {
+                return null;
+            }}
+            showsHorizontalScrollIndicator={false}
+        ></SectionList>
     );
 };
 

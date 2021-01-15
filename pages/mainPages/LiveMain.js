@@ -13,7 +13,7 @@ import {
 import Color from "../../constants/Color";
 import MainNavOptions from "../../components/MainNavOptions";
 
-import Subheader from "../../components/SubHeader";
+import SubHeader from "../../components/SubHeader";
 import VideoList from "../../components/VideoList";
 
 const windowWidth = Dimensions.get("window").width;
@@ -29,13 +29,14 @@ const SECTIONS = [
                 photo: require("../../assets/images/rosepasta.png"),
                 name: "로제 파스타 맛집[로파]",
             },
+            {
+                id: 2,
+                photo: require("../../assets/images/rosepasta.png"),
+                name: "안녕앙ㄴ녕",
+            },
         ],
     },
 ];
-
-const header = ({ section: { smallTxt, hashTxt } }) => {
-    return <Subheader smallTxt={smallTxt} hashTxt={hashTxt}></Subheader>;
-};
 
 const footer = ({ section }) => {
     return (
@@ -58,9 +59,12 @@ const LiveMain = (props) => {
             style={{ flex: 1 }}
             // stickySectionHeadersEnabled={false}
             sections={SECTIONS}
-            renderSectionHeader={header}
-            renderItem={({ item, section }) => {
-                return (
+            renderSectionHeader={({ section }) => (
+                <>
+                    <SubHeader
+                        smallTxt={section.smallTxt}
+                        hashTxt={section.hashTxt}
+                    ></SubHeader>
                     <VideoList
                         imageDatas={section.data}
                         style={{ padding: 15 }}
@@ -68,8 +72,13 @@ const LiveMain = (props) => {
                         width_divider={1.3}
                         png={true}
                     ></VideoList>
-                );
+                </>
+            )}
+            stickySectionHeadersEnabled={false}
+            renderItem={({ item, section }) => {
+                return null;
             }}
+            showsHorizontalScrollIndicator={true}
             renderSectionFooter={footer}
         ></SectionList>
     );
