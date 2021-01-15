@@ -5,6 +5,7 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const SubHeader = (props) => {
+    // props: smallTxt, hashTxt
     return (
         <View
             style={{

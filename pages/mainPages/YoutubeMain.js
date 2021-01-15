@@ -25,9 +25,9 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const imageDatas = [
-    { name: "커리", photo: require("../../constants/curry.jpg") },
-    { name: "포", photo: require("../../constants/pho.jpeg") },
-    { name: "치킨", hoto: require("../../constants/chicken.jpg") },
+    { name: "커리", photo: require("../../assets/images/curry.jpg") },
+    { name: "포", photo: require("../../assets/images/pho.jpeg") },
+    { name: "치킨", hoto: require("../../assets/images/chicken.jpg") },
 ];
 
 const VideoList = (props) => {

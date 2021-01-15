@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, ImageBackground, TouchableHighlight, StyleSheet, Dimensions } from "react-native";
+import {
+    View,
+    Text,
+    ImageBackground,
+    TouchableHighlight,
+    StyleSheet,
+    Dimensions,
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 import Color from "../constants/Color";
@@ -7,16 +14,19 @@ import Color from "../constants/Color";
 const windowHeight = Dimensions.get("window").height;
 const pad = windowHeight / 80;
 
-const BORDER_RADIUS = pad*2;
+const BORDER_RADIUS = pad * 2;
 
 const ListPhoto = (props) => {
     // TODO PHOTO HEIGHT 이미지에서 받아와서 맞춰 주기: 비율 관련해서 계산.
-    const ITEM_WIDTH = props.ITEM_WIDTH - pad*2.5;
+    // props: png(bool)
+    const ITEM_WIDTH = props.ITEM_WIDTH - pad * 2.5;
     const ITEM_HEIGHT = (ITEM_WIDTH * 240) / 150;
-    const PHOTO_HEIGHT = (ITEM_WIDTH * 4) / 3;
+    const PHOTO_HEIGHT = props.png
+        ? (ITEM_WIDTH * 5) / 3 + 20
+        : (ITEM_WIDTH * 4) / 3;
 
     const GAP = (ITEM_HEIGHT - PHOTO_HEIGHT) / 2;
-    const ICON_SIZE = pad*3;
+    const ICON_SIZE = pad * 3;
 
     return (
         <View style={styles.container}>
@@ -28,8 +38,20 @@ const ListPhoto = (props) => {
                     })
                 }
             >
-                <ImageBackground source={props.item} style={{ ...styles.image__photo, width: ITEM_WIDTH, height: ITEM_HEIGHT }} imageStyle={{ height: PHOTO_HEIGHT, marginTop: GAP }}>
-                    <AntDesign name="caretright" size={ICON_SIZE} color={"white"} />
+                <ImageBackground
+                    source={props.item}
+                    style={{
+                        ...styles.image__photo,
+                        width: ITEM_WIDTH,
+                        height: ITEM_HEIGHT,
+                    }}
+                    imageStyle={{ height: PHOTO_HEIGHT, marginTop: GAP }}
+                >
+                    <AntDesign
+                        name="caretright"
+                        size={ICON_SIZE}
+                        color={"white"}
+                    />
                 </ImageBackground>
             </TouchableHighlight>
             <View style={styles.info__wrapper}>
@@ -41,7 +63,7 @@ const ListPhoto = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: pad*1.5,
+        marginTop: pad * 1.5,
     },
     image__wrapper: {
         margin: pad,
@@ -62,11 +84,11 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
-        paddingHorizontal: pad*1.5,
+        paddingHorizontal: pad * 1.5,
     },
     info__name: {
-        color: "white",
-        fontFamily: "noto_bold",
+        color: "black",
+        fontFamily: "noto_regular",
         fontSize: windowHeight / 53,
         flex: 6,
         textAlign: "center",
