@@ -12,10 +12,9 @@ import {
 
 import Color from "../../constants/Color";
 import MainNavOptions from "../../components/MainNavOptions";
-import CommonStyles from "../../constants/CommonStyle";
 
 import Subheader from "../../components/SubHeader";
-import ListPhoto from "../../components/ListPhoto";
+import VideoList from "../../components/VideoList";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -26,6 +25,7 @@ const SECTIONS = [
         hashTxt: "라이브 온",
         data: [
             {
+                id: 1,
                 photo: require("../../assets/images/rosepasta.png"),
                 name: "로제 파스타 맛집[로파]",
             },
@@ -56,27 +56,18 @@ const LiveMain = (props) => {
     return (
         <SectionList
             style={{ flex: 1 }}
-            stickySectionHeadersEnabled={false}
+            // stickySectionHeadersEnabled={false}
             sections={SECTIONS}
             renderSectionHeader={header}
             renderItem={({ item, section }) => {
                 return (
-                    <FlatList
+                    <VideoList
+                        imageDatas={section.data}
                         style={{ padding: 15 }}
-                        horizontal
-                        data={section.data}
-                        renderItem={({ item }) => (
-                            <ListPhoto
-                                ITEM_WIDTH={windowWidth / 1.3}
-                                // style={{ margin: 30}}
-                                item={item.photo}
-                                navigation={props.navigation}
-                                rest_name={item.name}
-                                png={true}
-                            />
-                        )}
-                        keyExtractor={(item, index) => index.toString()}
-                    ></FlatList>
+                        navigation={props.navigation}
+                        width_divider={1.3}
+                        png={true}
+                    ></VideoList>
                 );
             }}
             renderSectionFooter={footer}

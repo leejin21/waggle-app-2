@@ -17,39 +17,20 @@ import Color from "../../constants/Color";
 import CommonStyles from "../../constants/CommonStyle";
 
 import MainNavOptions from "../../components/MainNavOptions";
-import ListPhoto from "../../components/ListPhoto";
+
 import SubHeader from "../../components/SubHeader";
+import VideoList from "../../components/VideoList";
 //////////////////////////////////////////////////////////////////////////
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const imageDatas = [
-    { name: "커리", photo: require("../../assets/images/curry.jpg") },
-    { name: "포", photo: require("../../assets/images/pho.jpeg") },
-    { name: "치킨", hoto: require("../../assets/images/chicken.jpg") },
+    { id: 1, name: "커리", photo: require("../../assets/images/curry.jpg") },
+    { id: 2, name: "포", photo: require("../../assets/images/pho.jpeg") },
+    { id: 3, name: "치킨", hoto: require("../../assets/images/chicken.jpg") },
 ];
 
-const VideoList = (props) => {
-    return (
-        <FlatList
-            key={"_"}
-            numColumns={3}
-            data={imageDatas}
-            renderItem={({ item }) => {
-                return (
-                    <ListPhoto
-                        ITEM_WIDTH={windowWidth / 2.3}
-                        item={item.photo}
-                        navigation={props.navigation}
-                        rest_name={item.name}
-                    />
-                );
-            }}
-            keyExtractor={(item, index) => index.toString()}
-        ></FlatList>
-    );
-};
 // SubHeader + VideoList = SubSection
 const SubSection = (props) => {
     return (
@@ -58,7 +39,12 @@ const SubSection = (props) => {
                 smallTxt={props.smallTxt}
                 hashTxt={props.hashTxt}
             ></SubHeader>
-            <VideoList navigation={props.navigation}></VideoList>
+            <VideoList
+                navigation={props.navigation}
+                imageDatas={imageDatas}
+                width_divider={2.3}
+                style={{}}
+            ></VideoList>
         </View>
     );
 };
