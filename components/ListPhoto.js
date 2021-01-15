@@ -9,8 +9,6 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
-import Color from "../constants/Color";
-
 const windowHeight = Dimensions.get("window").height;
 const pad = windowHeight / 80;
 
@@ -18,22 +16,23 @@ const BORDER_RADIUS = pad * 2;
 
 const ListPhoto = (props) => {
     // TODO PHOTO HEIGHT 이미지에서 받아와서 맞춰 주기: 비율 관련해서 계산.
-    // props: png(bool)
+    // props: live(bool)
     const ITEM_WIDTH = props.ITEM_WIDTH - pad * 2.5;
     const ITEM_HEIGHT = (ITEM_WIDTH * 240) / 150;
-    const PHOTO_HEIGHT = props.png
-        ? (ITEM_WIDTH * 5) / 3 + 20
-        : (ITEM_WIDTH * 4) / 3;
+    const PHOTO_HEIGHT = (ITEM_WIDTH * 4) / 3;
+    // const PHOTO_WIDTH= (ITEM_HEIGHT)
 
     const GAP = (ITEM_HEIGHT - PHOTO_HEIGHT) / 2;
     const ICON_SIZE = pad * 3;
+
+    const nav_where = props.live ? "LiveVideo" : "YoutubeVideo";
 
     return (
         <View style={styles.container}>
             <TouchableHighlight
                 style={styles.image__wrapper}
                 onPress={() =>
-                    props.navigation.navigate("YoutubeVideo", {
+                    props.navigation.navigate(nav_where, {
                         title: props.rest_name,
                     })
                 }
@@ -45,7 +44,7 @@ const ListPhoto = (props) => {
                         width: ITEM_WIDTH,
                         height: ITEM_HEIGHT,
                     }}
-                    imageStyle={{ height: PHOTO_HEIGHT, marginTop: GAP }}
+                    imageStyle={{ borderRadius: BORDER_RADIUS }}
                 >
                     <AntDesign
                         name="caretright"
@@ -73,8 +72,7 @@ const styles = StyleSheet.create({
         // photo size: 3:4
         // want: 2:3, and background: black
         flex: 1,
-        resizeMode: "contain",
-
+        resizeMode: "cover",
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "black",

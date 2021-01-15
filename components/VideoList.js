@@ -11,12 +11,13 @@ import {
 import ListPhoto from "../components/ListPhoto";
 
 const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 const VideoList = (props) => {
     // props: style, imageDatas, width_divider, navigation, png
     return (
         <FlatList
-            style={props.style}
+            style={{ paddingBottom: windowHeight / 60, ...props.style }}
             key={"_"}
             horizontal
             data={props.imageDatas}
@@ -27,7 +28,7 @@ const VideoList = (props) => {
                         item={item.photo}
                         navigation={props.navigation}
                         rest_name={item.name}
-                        png={props.png}
+                        live={props.live}
                         key={item.id}
                     />
                 );

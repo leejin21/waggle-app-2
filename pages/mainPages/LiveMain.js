@@ -26,13 +26,24 @@ const SECTIONS = [
         data: [
             {
                 id: 1,
-                photo: require("../../assets/images/rosepasta.png"),
-                name: "로제 파스타 맛집[로파]",
+                photo: require("../../assets/images/yogurt.png"),
+                name: "요거트볼 맛집[포이푸]",
+                video:
+                    "https://kr.object.ncloudstorage.com/waggle-video/yogurt.mp4",
             },
             {
                 id: 2,
-                photo: require("../../assets/images/rosepasta.png"),
-                name: "안녕앙ㄴ녕",
+                photo: require("../../assets/images/coffee.png"),
+                name: "루프탑 맛집[카히]",
+                video:
+                    "https://kr.object.ncloudstorage.com/waggle-video/yogurt.mp4",
+            },
+            {
+                id: 3,
+                photo: require("../../assets/images/kkomak.png"),
+                name: "꼬막 맛집[꼼꼼]",
+                video:
+                    "https://kr.object.ncloudstorage.com/waggle-video/yogurt.mp4",
             },
         ],
     },
@@ -66,7 +77,7 @@ const LiveMain = (props) => {
                         style={{ padding: 15 }}
                         navigation={props.navigation}
                         width_divider={1.3}
-                        png={true}
+                        live={true}
                     ></VideoList>
                 </>
             )}

@@ -8,7 +8,7 @@
     -Auth
 */
 
-//TODO: import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+// TODO: import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 /////////////////////////////////////////////////////////////////////////////////////
 // * IMPORT SECTION
 import React from "react";
@@ -17,6 +17,8 @@ import { NavigationContainer, StackActions } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AsyncStorage from "@react-native-community/async-storage";
+import { Ionicons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 
 // import logo header
 import MainNavOptions from "../components/MainNavOptions";
@@ -150,12 +152,35 @@ const BottomTab = ({ navigation, route }) => {
         <Tab.Navigator
             tabBarOptions={{
                 activeTintColor: "red",
-                // tabBarIcon: ""
-                inactiveTintColor: "pink",
+                inactiveTintColor: "grey",
+                labelPosition: "beside-icon",
+                adaptive: true,
             }}
         >
-            <Tab.Screen name="유튜브" component={YoutubeMain}></Tab.Screen>
-            <Tab.Screen name="라이브" component={LiveMain}></Tab.Screen>
+            <Tab.Screen
+                name="YoutubeMain"
+                component={YoutubeMain}
+                options={{
+                    tabBarIcon: ({ color, size }) => (
+                        <Ionicons
+                            name="ios-logo-youtube"
+                            size={size}
+                            color={color}
+                        />
+                    ),
+                    tabBarLabel: "유투브",
+                }}
+            ></Tab.Screen>
+            <Tab.Screen
+                name="LiveMain"
+                component={LiveMain}
+                options={{
+                    tabBarIcon: ({ color, size }) => (
+                        <Feather name="wifi" size={size} color={color} />
+                    ),
+                    tabBarLabel: "라이브",
+                }}
+            ></Tab.Screen>
         </Tab.Navigator>
     );
 };

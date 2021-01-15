@@ -8,48 +8,22 @@ import {
 } from "react-native";
 import VideoPlayer from "expo-video-player";
 
-import Color from "../../constants/Color";
-import CommonStyles from "../../constants/CommonStyle";
-
 import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
+
+import Color from "../../constants/Color";
+import CommonStyles from "../../constants/CommonStyle";
+
+import BottomButton from "../../components/BottomButton";
+import Card from "../../components/Card";
+import VideoOptions from "../../components/VideoOptions";
+import PickCouponButton from "../../components/PickCouponButton";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const pad = windowHeight / 60; //10
 const font = windowHeight / 65;
-
-const BottomButton = (props) => {
-    // props: active, onPress,
-    //        style_back_color(optional: in case of changing background color, ex: {backgroundColor: Colors.mid_grey})
-    return props.active ? (
-        <TouchableOpacity
-            style={{ ...styles.bottom_button, ...props.style_back_color }}
-            onPress={props.onPress}
-        >
-            {props.children}
-        </TouchableOpacity>
-    ) : (
-        <View
-            style={{
-                ...styles.bottom_button,
-                backgroundColor: "grey",
-                ...props.style_back_color,
-            }}
-        >
-            {props.children}
-        </View>
-    );
-};
-
-const Card = (props) => {
-    // props: style
-
-    return (
-        <View style={{ ...styles.card, ...props.style }}>{props.children}</View>
-    );
-};
 
 const timestamp = [
     { id: 0, name: "주변관경", milisec: 3000 },
@@ -83,17 +57,7 @@ const TimeStamp = (props) => {
 const YoutubeVideo = (props) => {
     useEffect(() => {
         props.navigation.setOptions({
-            headerTransparent: true,
-            headerBackTitleVisible: false,
-            headerStyle: {
-                shadowColor: "transparent",
-                height: windowWidth * (5 / 16),
-            },
-            headerTitleStyle: {
-                color: "black",
-                fontSize: 30,
-                fontFamily: "noto_bold",
-            },
+            ...VideoOptions,
             title: props.route.params.title,
         });
     }, []);
@@ -157,38 +121,12 @@ const YoutubeVideo = (props) => {
                     );
                 })}
             </View>
-            <View style={styles.button__wrapper}>
-                <BottomButton
-                    active={true}
-                    onPress={() =>
-                        props.navigation.navigate("Basket", {
-                            title: props.route.params.title,
-                        })
-                    }
-                >
-                    <Text style={CommonStyles.bold_text}>픽하고 쿠폰받기</Text>
-                </BottomButton>
-            </View>
+            <PickCouponButton></PickCouponButton>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    card: {
-        backgroundColor: "#565656",
-        flex: 3,
-        marginTop: pad,
-        marginHorizontal: pad,
-        borderRadius: pad * 2.7,
-        padding: pad * 2,
-    },
-    bottom_button: {
-        backgroundColor: Color.yellow,
-        padding: pad,
-        paddingBottom: pad,
-        width: "100%",
-    },
-
     container: {
         flex: 1,
         height: "100%",
