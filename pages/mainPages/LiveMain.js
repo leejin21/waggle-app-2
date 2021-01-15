@@ -50,10 +50,6 @@ const footer = ({ section }) => {
 };
 
 const LiveMain = (props) => {
-    useEffect(() => {
-        props.navigation.setOptions(MainNavOptions);
-    }, []);
-
     return (
         <SectionList
             style={{ flex: 1 }}

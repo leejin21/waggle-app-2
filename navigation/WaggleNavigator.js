@@ -16,6 +16,10 @@ import { Dimensions, StyleSheet, Image } from "react-native";
 import { NavigationContainer, StackActions } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import AsyncStorage from "@react-native-community/async-storage";
+
+// import logo header
+import MainNavOptions from "../components/MainNavOptions";
 
 // import screens from each folders
 // import CompleteRegisterScreen from "../screens/authScreens/CompleteRegisterScreen";
@@ -27,7 +31,6 @@ import YoutubeVideo from "../pages/mainPages/YoutubeVideo";
 import LiveMain from "../pages/mainPages/LiveMain";
 import LiveVideo from "../pages/mainPages/LiveVideo";
 
-import AsyncStorage from "@react-native-community/async-storage";
 /////////////////////////////////////////////////////////////////////////////////////
 //* INTIALIZATION SECTION
 
@@ -37,9 +40,8 @@ const font = windowHeight / 87;
 const Auth = createStackNavigator();
 // const App = createStackNavigator();
 const YoutubeStack = createStackNavigator();
-const LiveStack = createStackNavigator();
-const HomeStack = createStackNavigator();
-const Main = createBottomTabNavigator();
+const Main = createStackNavigator();
+const Tab = createBottomTabNavigator();
 /////////////////////////////////////////////////////////////////////////////////////
 // * app stack section
 
@@ -127,57 +129,6 @@ const UpdateScreens = {
 //     ...UpdateScreens.SettingUpdates,
 // };
 
-const YoutubeScreen = () => {
-    return (
-        <YoutubeStack.Navigator>
-            <YoutubeStack.Screen
-                name="YoutubeMain"
-                component={YoutubeMain}
-                options={{
-                    headerBackTitleVisible: false,
-                    headerTitle: (props) => (
-                        <Image
-                            style={{ width: 160, height: 80 }}
-                            /*source={require("../assets/images/logo.png")}*/ resizeMode="contain"
-                        ></Image>
-                    ),
-                    headerTitleStyle: {
-                        flex: 1,
-                        textAlign: "center",
-                    },
-                    /*
-                        headerStyle: {
-                            backgroundColor: "black",
-                            height: 150,
-                            // 밑에 줄 그인 거 없애기 위함
-                            shadowColor: "transparent",
-                            backgroundColor: "grey",
-                        },
-                    */
-                }}
-            ></YoutubeStack.Screen>
-            <YoutubeStack.Screen
-                name="YoutubeVideo"
-                component={YoutubeVideo}
-            ></YoutubeStack.Screen>
-        </YoutubeStack.Navigator>
-    );
-};
-
-const LiveScreen = () => {
-    return (
-        <LiveStack.Navigator>
-            <LiveStack.Screen
-                name="LiveMain"
-                component={LiveMain}
-            ></LiveStack.Screen>
-            <LiveStack.Screen
-                name="LiveVideo"
-                component={LiveVideo}
-            ></LiveStack.Screen>
-        </LiveStack.Navigator>
-    );
-};
 /////////////////////////////////////////////////////////////////////////////////////
 
 // const AppStack = () => {
@@ -190,11 +141,34 @@ const LiveScreen = () => {
 //     );
 // };
 
-const MainTab = () => {
+const BottomTab = ({ navigation, route }) => {
+    React.useLayoutEffect(() => {
+        // logo header 설정해 주기
+        navigation.setOptions(MainNavOptions);
+    }, [navigation, route]);
+    return (
+        <Tab.Navigator
+            tabBarOptions={{
+                activeTintColor: "red",
+                // tabBarIcon: ""
+                inactiveTintColor: "pink",
+            }}
+        >
+            <Tab.Screen name="유튜브" component={YoutubeMain}></Tab.Screen>
+            <Tab.Screen name="라이브" component={LiveMain}></Tab.Screen>
+        </Tab.Navigator>
+    );
+};
+
+const MainStack = () => {
     return (
         <Main.Navigator>
-            <Main.Screen name="Youtube" component={YoutubeScreen}></Main.Screen>
-            <Main.Screen name="Live" component={LiveScreen}></Main.Screen>
+            <Main.Screen name="BottomTab" component={BottomTab}></Main.Screen>
+            <Main.Screen
+                name="YoutubeVideo"
+                component={YoutubeVideo}
+            ></Main.Screen>
+            <Main.Screen name="LiveVideo" component={LiveVideo}></Main.Screen>
         </Main.Navigator>
     );
 };
@@ -212,7 +186,7 @@ const waggleNavigator = () => {
     const isSignedIn = true;
     return (
         <NavigationContainer>
-            {isSignedIn ? <MainTab></MainTab> : <AuthStack></AuthStack>}
+            {isSignedIn ? <MainStack></MainStack> : <AuthStack></AuthStack>}
         </NavigationContainer>
     );
 };

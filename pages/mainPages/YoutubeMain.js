@@ -52,10 +52,6 @@ const SECTIONS = [
 
 // Page component
 const YoutubeMain = (props) => {
-    useEffect(() => {
-        props.navigation.setOptions(MainNavOptions);
-    }, []);
-
     return (
         <SectionList
             sections={SECTIONS}
