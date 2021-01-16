@@ -21,11 +21,11 @@ const PickCouponButton = ({ navigation }) => {
         >
             <FontAwesome5
                 name="check-double"
-                size={26}
+                size={30}
                 color="white"
                 style={styles.buttom__icon}
             />
-            <Text style={styles.buttom__text}>픽하고 쿠폰받기</Text>
+            <Text style={styles.buttom__text}>픽하고 쿠폰받기   </Text>
         </BottomButton>
     );
 };
@@ -38,14 +38,46 @@ const styles = StyleSheet.create({
         alignItems: "flex-start",
         justifyContent: "center",
         flexDirection: "row",
+
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.55,
+        shadowRadius: 4,
+
+        elevation: 5,
+
+        borderRadius: 88,
     },
     buttom__icon: {
         paddingTop: 5,
         marginHorizontal: 10,
+
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.35,
+        shadowRadius: 3,
+
+        elevation: 5,
     },
     buttom__text: {
         fontFamily: "noto_bold",
-        fontSize: font * 1.8,
+        fontSize: font * 2,
         color: "white",
+
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.45,
+        shadowRadius: 3,
+
+        elevation: 5,
     },
 });

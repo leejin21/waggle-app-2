@@ -14,6 +14,8 @@ import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 
+import LinearGradient from 'react-native-linear-gradient';
+
 import Color from "../../constants/Color";
 import CommonStyles from "../../constants/CommonStyle";
 
@@ -37,18 +39,34 @@ const TimeStamp = (props) => {
     };
 
     return (
-        <TouchableOpacity onPress={() => handleClick()}>
+        <TouchableOpacity activeOpacity={0.43} onPress={() => handleClick()}>
             <Card style={styles.timestamp}>
                 <View style={{ flexDirection: "row" }}>
                     <AntDesign
                         name="forward"
                         size={font * 1.7}
                         color={Color.gray}
+                        style={styles.shadow__txt}
                     ></AntDesign>
                     <Text> </Text>
                 </View>
                 <View>
-                    <Text style={styles.timestamp_txt}>{props.name}</Text>
+                    <Text style={{...styles.timestamp_txt, ...styles.shadow__txt}}>{props.name}</Text>
+                </View>
+            </Card>
+        </TouchableOpacity>
+    );
+};
+
+const Header = (props) => {
+    return (
+        <TouchableOpacity style={styles.header} activeOpacity={1}>
+            <Card style={{ borderRadius: pad*2, backgroundColor: Color.warmgray, opacity: 0.75}}>
+                <View>
+                    <AntDesign name="left" size={font * 1.9} color={Color.white} style={styles.header__left}></AntDesign>
+                </View>
+                <View>
+                    <Text style={styles.header__txt}>{props.title}</Text>
                 </View>
             </Card>
         </TouchableOpacity>
@@ -59,16 +77,11 @@ const TimeStamp = (props) => {
 const YoutubeVideo = (props) => {
     props.navigation.setOptions({
         headerTransparent: true,
-        headerBackTitleVisible: true,
+        headerBackTitleVisible: false,
         headerStyle: {
-            height: windowWidth * (5/16),
+            height:0,
         },
-        headerTitleStyle: {
-            color: "black",
-            fontSize: 30,
-            fontFamily: "noto_bold"
-        },
-        //title: props.route.params.title
+        headerLeft: () => {null},
     });
 
     /*useEffect(() => {
@@ -91,6 +104,8 @@ const YoutubeVideo = (props) => {
     };
 
     return (
+        <>
+        <Header title={props.route.params.title}></Header>
         <View style={styles.container}>
                 <VideoPlayer
                     videoProps={{
@@ -113,7 +128,7 @@ const YoutubeVideo = (props) => {
                     //playIcon={playIcon}
                     //pauseIcon={pauseIcon}
                     //replayIcon={replayIcon}
-                    videoBackground="grey"
+                    videoBackground="transparent"
                     //showControlsOnLoad={true}
                     sliderColor={Color.yellow}
                     showFullscreenButton={false}
@@ -126,10 +141,45 @@ const YoutubeVideo = (props) => {
                 <PickCouponButton></PickCouponButton>
             </View>
         </View>
+        </>
     );
 };
 
 const styles = StyleSheet.create({
+    header: {
+        zIndex: 1,
+        position: "absolute",
+        height: windowHeight / 10,
+        width: windowWidth * 9.9 / 10,
+
+        right: windowWidth * 0.05 / 10,
+        bottom: windowHeight * 0.86
+
+    },
+    header__left: {
+        position: "absolute",
+        left: -13,
+        top: -5,
+
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.7,
+        shadowRadius: 2,
+
+        elevation: 5,
+    },
+    header__txt: {
+        fontFamily: "noto_bold",
+        fontSize: 29,
+
+        position: "absolute",
+        left: 135,
+        top: -14
+    },
+
     container: {
         flex: 1,
         height: "100%",
@@ -137,27 +187,23 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
     },
 
-    header__right: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        marginRight: pad * 0.5,
-    },
-    heart_icon: {
-        margin: pad * 0.5,
-    },
-    more_icon: {
-        margin: pad * 0.5,
-        borderRadius: 15,
-    },
-
     timestamp__wrapper: {
-        backgroundColor: Color.black,
+        backgroundColor: Color.warmgray,
         width: "100%",
         height: windowHeight * 1.1 / 11.5,
         justifyContent: "flex-start",
         alignItems: "center",
         flexDirection: "row",
+
+        shadowColor: Color.warmgray,
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 12,
+
+        elevation: 0,
 
         //zIndex: 1,
         //position: "absolute"
@@ -171,6 +217,16 @@ const styles = StyleSheet.create({
         paddingRight: pad * 1.3,
         flexDirection: "row",
         alignItems: "center",
+
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+
+        elevation: 5,
     },
     timestamp_txt: {
         color: Color.gray,
@@ -182,7 +238,19 @@ const styles = StyleSheet.create({
     bottombutton__wrapper: {
         width: windowWidth,
         height: windowHeight * 1.2 / 11.5
-    }
+    },
+
+    shadow__txt: {
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.18,
+        shadowRadius: 1.2,
+
+        elevation: 5,
+    },
 });
 
 export default YoutubeVideo;

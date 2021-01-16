@@ -213,7 +213,7 @@ const AuthStack = () => {
 };
 
 const waggleNavigator = () => {
-    const isSignedIn = true;
+    const isSignedIn = false;
     return (
         <NavigationContainer>
             {isSignedIn ? <MainStack></MainStack> : <AuthStack></AuthStack>}
