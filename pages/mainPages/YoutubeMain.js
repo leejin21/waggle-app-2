@@ -1,3 +1,4 @@
+
 // TODO: look up to "SectionList" component
 //////////////////////////////////////////////////////////////////////////
 import React, { useEffect } from "react";
@@ -19,17 +20,35 @@ import CommonStyles from "../../constants/CommonStyle";
 
 import MainNavOptions from "../../components/MainNavOptions";
 
-import SubHeader from "../../components/SubHeader";
-import VideoList from "../../components/VideoList";
+//import SubHeader from "../../components/SubHeader";
+//import VideoList from "../../components/VideoList";
 //////////////////////////////////////////////////////////////////////////
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
+const SECTIONS = [
+    {
+        smallTxt: "우리 주변 숨겨진",
+        hashTxt: "지역맛집",
+        data: imageDatas,
+    },
+    {
+        smallTxt: "매운 음식이 땡길때",
+        hashTxt: "매운음식 맛집",
+        data: imageDatas,
+    },
+    {
+        smallTxt: "우리 주변 숨겨진",
+        hashTxt: "지역맛집",
+        data: imageDatas,
+    },
+];
+
 const imageDatas = [
-    { name: "커리", length: "1:10", photo: require("../../constants/curry.jpg") },
-    { name: "포", length: "1:20", photo: require("../../constants/pho.jpeg") },
-    { name: "치킨", length: "1:50", photo: require("../../constants/chicken.jpg") },
+    { name: "커리", length: "1:10", photo: require("../../assets/images/curry.jpg") },
+    { name: "포", length: "1:20", photo: require("../../assets/images/pho.jpeg") },
+    { name: "치킨", length: "1:50", photo: require("../../assets/images/chicken.jpg") },
 ];
 
 const SubHeader = (props) => {
