@@ -13,7 +13,7 @@ import CommonStyles from "../../constants/CommonStyle";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-const imageDatas = [
+const imageDatas1 = [
     { name: "커리", photo: require("../../assets/images/thumbnail_1.png") },
     { name: "포", photo: require("../../assets/images/thumbnail_2.png") },
     { name: "치킨", hoto: require("../../assets/images/thumbnail_3.png") },
@@ -32,7 +32,7 @@ const VideoList = (props) => {
         <FlatList
             key={"_"}
             numColumns={3}
-            data={imageDatas}
+            data={props.imageDatas}
             renderItem={({ item }) => {
                 return <ListPhoto ITEM_WIDTH={windowWidth / 2.3} item={item.photo} navigation={props.navigation} rest_name={item.name}/>;
             }}
@@ -45,7 +45,7 @@ const SubSection = (props) => {
     return (
         <View>
             <SubHeader smallTxt={props.smallTxt} hashTxt={props.hashTxt}></SubHeader>
-            <VideoList navigation={props.navigation}></VideoList>
+            <VideoList navigation={props.navigation} imageDatas={props.imageDatas}></VideoList>
         </View>
     );
 }
@@ -79,9 +79,9 @@ const YoutubeMain = (props) => {
 
     return (
         <ScrollView>
-            <SubSection navigation={props.navigation} smallTxt={"우리 주변 숨겨진"} hashTxt={"지역맛집"} ></SubSection>
-            <SubSection navigation={props.navigation} smallTxt={"매운 음식이 땡길때"} hashTxt={"매운음식 맛집"}></SubSection>
-            <SubSection navigation={props.navigation} smallTxt={"우리 주변 숨겨진"} hashTxt={"지역맛집"}></SubSection>
+            <SubSection navigation={props.navigation} smallTxt={"우리 주변 숨겨진"} hashTxt={"지역맛집"} imageDatas={imageDatas1}></SubSection>
+            <SubSection navigation={props.navigation} smallTxt={"매운 음식이 땡길때"} hashTxt={"매운음식 맛집"} imageDatas={imageDatas2}></SubSection>
+            <SubSection navigation={props.navigation} smallTxt={"우리 주변 숨겨진"} hashTxt={"지역맛집"} imageDatas={imageDatas3}></SubSection>
         </ScrollView>
     );
 };
