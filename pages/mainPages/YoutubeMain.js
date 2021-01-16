@@ -14,9 +14,9 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const imageDatas = [
-    { name: "커리", photo: require("../../assets/images/curry.jpg") },
-    { name: "포", photo: require("../../assets/images/pho.jpeg") },
-    { name: "치킨", hoto: require("../../assets/images/chicken.jpg") },
+    { name: "커리", photo: require("../../assets/images/thumbnail_1.png") },
+    { name: "포", photo: require("../../assets/images/thumbnail_2.png") },
+    { name: "치킨", hoto: require("../../assets/images/thumbnail_3.png") },
 ];
 
 const SubHeader = (props) => {
