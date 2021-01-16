@@ -192,7 +192,7 @@ const MainStack = () => {
         <Main.Navigator>
             {/*<Main.Screen name="BottomTab" component={BottomTab}></Main.Screen>*/}
             
-            {/*<Main.Screen name="YoutubeMain" component={YoutubeMain}></Main.Screen>*/}
+            {<Main.Screen name="YoutubeMain" component={YoutubeMain}></Main.Screen>}
 
             <Main.Screen
                 name="YoutubeVideo"
@@ -213,7 +213,7 @@ const AuthStack = () => {
 };
 
 const waggleNavigator = () => {
-    const isSignedIn = false;
+    const isSignedIn = true;
     return (
         <NavigationContainer>
             {isSignedIn ? <MainStack></MainStack> : <AuthStack></AuthStack>}

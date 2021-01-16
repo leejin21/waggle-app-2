@@ -198,10 +198,10 @@ const styles = StyleSheet.create({
         shadowColor: Color.warmgray,
         shadowOffset: {
             width: 0,
-            height: 0,
+            height: -3,
         },
         shadowOpacity: 1,
-        shadowRadius: 12,
+        shadowRadius: 5,
 
         elevation: 0,
 
@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
-            height: 2,
+            height: 1,
         },
         shadowOpacity: 0.18,
         shadowRadius: 1.2,

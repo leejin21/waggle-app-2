@@ -67,7 +67,7 @@ const YoutubeMain = (props) => {
             shadowColor: "#000",
             shadowOffset: {
                 width: 0,
-                height: 2,
+                height: 3,
             },
             shadowOpacity: 0.28,
             shadowRadius: 3.84,
@@ -91,15 +91,16 @@ const styles = StyleSheet.create({
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
-            height: 2,
+            height: 4,
         },
-        shadowOpacity: 0.45,
+        shadowOpacity: 0.35,
         shadowRadius: 4.5,
 
         elevation: 5,
     },
     logo: {
         marginLeft: 18, 
+        marginBottom: 10,
 
         shadowColor: "#000",
         shadowOffset: {
