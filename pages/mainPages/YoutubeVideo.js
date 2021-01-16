@@ -28,8 +28,10 @@ const pad = windowHeight / 60; //10
 const font = windowHeight / 65;
 
 const timestamp = [
-    { id: 0, name: "주변관경", milisec: 3000 },
-    { id: 1, name: "인테리어", milisec: 8000 },
+    { id: 0, name: "주변관경", milisec: 5900 },
+    { id: 1, name: "인테리어", milisec: 16000 },
+    { id: 2, name: "메뉴", milisec: 40000 },
+    { id: 3, name: "먹방", milisec: 90000 },
 ];
 const TimeStamp = (props) => {
     const handleClick = () => {
@@ -90,16 +92,6 @@ const YoutubeVideo = (props) => {
     }, []);*/
 
     const [pos, setPos] = useState(0);
-
-    const playIcon = () => {
-        return <FontAwesome name="play" size={font * 5} color="white" />;
-    };
-    const pauseIcon = () => {
-        return <FontAwesome name="pause" size={font * 5} color="white" />;
-    };
-    const replayIcon = () => {
-        return <MaterialIcons name="replay" size={font * 5} color="white" />;
-    };
 
     return (
         <>
