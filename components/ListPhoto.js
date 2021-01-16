@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, ImageBackground, TouchableHighlight, StyleSheet, Dimensions } from "react-native";
+import {
+    View,
+    Text,
+    ImageBackground,
+    TouchableHighlight,
+    StyleSheet,
+    Dimensions,
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 import Color from "../constants/Color";
@@ -8,23 +15,27 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 const windowHeight = Dimensions.get("window").height;
 const pad = windowHeight / 80;
 
-const BORDER_RADIUS = pad*2;
+const BORDER_RADIUS = pad * 2;
 
 const ListPhoto = (props) => {
     // TODO PHOTO HEIGHT 이미지에서 받아와서 맞춰 주기: 비율 관련해서 계산.
-    const ITEM_WIDTH = props.ITEM_WIDTH - pad*2.5;
+    // props: live(bool)
+    const ITEM_WIDTH = props.ITEM_WIDTH - pad * 2.5;
     const ITEM_HEIGHT = (ITEM_WIDTH * 240) / 150;
     const PHOTO_HEIGHT = (ITEM_WIDTH * 4) / 3;
+    // const PHOTO_WIDTH= (ITEM_HEIGHT)
 
     const GAP = (ITEM_HEIGHT - PHOTO_HEIGHT) / 2;
-    const ICON_SIZE = pad*3;
+    const ICON_SIZE = pad * 3;
+
+    const nav_where = props.live ? "LiveVideo" : "YoutubeVideo";
 
     return (
         <View style={styles.container}>
             <TouchableHighlight
                 style={styles.image__wrapper}
                 onPress={() =>
-                    props.navigation.navigate("YoutubeVideo", {
+                    props.navigation.navigate(nav_where, {
                         title: props.rest_name,
                     })
                 }

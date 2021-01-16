@@ -1,14 +1,27 @@
 // TODO: look up to "SectionList" component
-
-import React from "react";
-import { View, StyleSheet, FlatList, Dimensions, Text, Image } from "react-native";
+//////////////////////////////////////////////////////////////////////////
+import React, { useEffect } from "react";
+import {
+    View,
+    StyleSheet,
+    FlatList,
+    Dimensions,
+    Text,
+    Image,
+    SectionList,
+} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { color } from "react-native-reanimated";
+//////////////////////////////////////////////////////////////////////////
 
-import ListPhoto from "../../components/ListPhoto"
-
-import Color from "../../constants/Color"
+import Color from "../../constants/Color";
 import CommonStyles from "../../constants/CommonStyle";
+
+import MainNavOptions from "../../components/MainNavOptions";
+
+import SubHeader from "../../components/SubHeader";
+import VideoList from "../../components/VideoList";
+//////////////////////////////////////////////////////////////////////////
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -83,11 +96,28 @@ const YoutubeMain = (props) => {
     });
 
     return (
-        <ScrollView>
-            <SubSection navigation={props.navigation} smallTxt={"우리 주변 숨겨진"} hashTxt={"지역맛집"} ></SubSection>
-            <SubSection navigation={props.navigation} smallTxt={"매운 음식이 땡길때"} hashTxt={"매운음식 맛집"}></SubSection>
-            <SubSection navigation={props.navigation} smallTxt={"우리 주변 숨겨진"} hashTxt={"지역맛집"}></SubSection>
-        </ScrollView>
+        <SectionList
+            sections={SECTIONS}
+            renderSectionHeader={({ section }) => (
+                <>
+                    <SubHeader
+                        smallTxt={section.smallTxt}
+                        hashTxt={section.hashTxt}
+                    ></SubHeader>
+                    <VideoList
+                        imageDatas={section.data}
+                        style={{}}
+                        navigation={props.navigation}
+                        width_divider={2.3}
+                    ></VideoList>
+                </>
+            )}
+            stickySectionHeadersEnabled={false}
+            renderItem={({ item, section }) => {
+                return null;
+            }}
+            showsHorizontalScrollIndicator={false}
+        ></SectionList>
     );
 };
 
