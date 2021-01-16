@@ -14,15 +14,25 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const imageDatas = [
-    { name: "커리", photo: require("../../constants/curry.jpg") },
-    { name: "포", photo: require("../../constants/pho.jpeg") },
-    { name: "치킨", hoto: require("../../constants/chicken.jpg") },
+    { name: "커리", length: "1:10", photo: require("../../constants/curry.jpg") },
+    { name: "포", length: "1:20", photo: require("../../constants/pho.jpeg") },
+    { name: "치킨", length: "1:50", photo: require("../../constants/chicken.jpg") },
 ];
 
 const SubHeader = (props) => {
     return (
-        <View style={{width: windowWidth, height: windowHeight/12, alignItems: "flex-start", paddingLeft: 20, justifyContent: "center", backgroundColor: "white"}}>
-            <Text style={{fontFamily: "noto_regular", fontSize: 17}}>{props.smallTxt}</Text>
+        <View style={{width: windowWidth, height: windowHeight/11, alignItems: "flex-start", paddingLeft: 20, justifyContent: "center", backgroundColor: "white",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.5,
+        shadowRadius: 3.3,
+
+        elevation: 5,
+        }}>
+            <Text style={{fontFamily: "noto_bold", fontSize: 17}}>{props.smallTxt}</Text>
             <Text style={{fontFamily: "noto_bold", fontSize: 24, color: "red"}}>#{props.hashTxt}</Text>
         </View>
     );
@@ -34,9 +44,11 @@ const VideoList = (props) => {
             numColumns={3}
             data={imageDatas}
             renderItem={({ item }) => {
-                return <ListPhoto ITEM_WIDTH={windowWidth / 2.3} item={item.photo} navigation={props.navigation} rest_name={item.name}/>;
+                return <ListPhoto ITEM_WIDTH={windowWidth / 2.3} item={item.photo} navigation={props.navigation} rest_name={item.name} video_length={item.length}/>;
             }}
             keyExtractor={(item, index) => index.toString()}
+            flexDirection= 'column'
+            scrollEnabled={true}
         ></FlatList>
     );
 }
@@ -54,7 +66,7 @@ const SubSection = (props) => {
 const YoutubeMain = (props) => {
     props.navigation.setOptions({
         headerBackTitleVisible: false,
-        headerTitle: (props) => <Image style={{ width: 130, height: 130 }} source={require("../../constants/logo_white.png")} resizeMode="contain"></Image>,
+        headerTitle: (props) => <Image style={{ ...styles.logo, width: 130, height: 130 }} source={require("../../constants/logo_white.png")} resizeMode="contain"></Image>,
         headerTitleStyle: {
             flex: 1,
             textAlign: "center",
@@ -62,10 +74,10 @@ const YoutubeMain = (props) => {
         headerStyle: {
             backgroundColor: Color.yellow,
             //width: windowWidth,
-            height: windowWidth * (5/16),
+            height: windowWidth * (5/17),
             
-            // 밑에 줄 그인 거 없애기 위함
-            shadowColor: "transparent",
+            shadowOpacity: 0.5,
+            shadowRadius: 4
         },
         //headerRight: () => <ProfileLogo touchable={true} navigation={props.navigation} style={{ marginRight: pad*1.2 }}></ProfileLogo>,
     });
@@ -80,6 +92,20 @@ const YoutubeMain = (props) => {
 };
 
 const styles = StyleSheet.create({
+    logo: {
+        marginBottom: 18,
+        marginLeft: 25,
+
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.23,
+        shadowRadius: 3.84,
+
+        elevation: 5,
+    }
 });
 
 export default YoutubeMain;

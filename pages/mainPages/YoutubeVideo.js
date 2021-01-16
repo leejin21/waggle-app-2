@@ -1,3 +1,5 @@
+// TODO: zIndex -> timestamp
+
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from "react-native";
 import VideoPlayer from 'expo-video-player';
@@ -63,7 +65,6 @@ const YoutubeVideo = (props) => {
         headerTransparent: true,
         headerBackTitleVisible: false,
         headerStyle: {
-            shadowColor: "transparent",
             height: windowWidth * (5/16),
         },
         headerTitleStyle: {
@@ -128,7 +129,7 @@ const YoutubeVideo = (props) => {
             </View>
             <View style={styles.button__wrapper}>
                 <BottomButton active={true} onPress={() => props.navigation.navigate("Basket", { title: props.route.params.title })}>
-                    <Text style={CommonStyles.bold_text}>픽하고 쿠폰받기</Text>
+                    <Text style={{...CommonStyles.bold_text, color:"white"}}>픽하고 쿠폰받기</Text>
                 </BottomButton>
             </View>
         </View>
@@ -163,6 +164,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         backgroundColor: Color.warmgray,
         width: "100%",
+
+        zIndex: 0
     },
     button__wrapper: {
         flex: 2,
@@ -188,7 +191,10 @@ const styles = StyleSheet.create({
         width: "100%",
         justifyContent: "flex-start",
         alignItems: "center",
-        flexDirection: "row"
+        flexDirection: "row",
+
+        zIndex: 1,
+        position: "absolute"
     },
     timestamp: {
         backgroundColor: Color.warmgray,

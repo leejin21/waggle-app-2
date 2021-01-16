@@ -3,6 +3,7 @@ import { View, Text, ImageBackground, TouchableHighlight, StyleSheet, Dimensions
 import { AntDesign } from "@expo/vector-icons";
 
 import Color from "../constants/Color";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const windowHeight = Dimensions.get("window").height;
 const pad = windowHeight / 80;
@@ -29,7 +30,8 @@ const ListPhoto = (props) => {
                 }
             >
                 <ImageBackground source={props.item} style={{ ...styles.image__photo, width: ITEM_WIDTH, height: ITEM_HEIGHT }} imageStyle={{ height: PHOTO_HEIGHT, marginTop: GAP }}>
-                    <AntDesign name="caretright" size={ICON_SIZE} color={"white"} />
+                    <View style={{ flex:1, paddingBottom:3 }}><Text style={{color: "white", fontSize:15, fontFamily:"noto_regular"}}>{props.video_length}</Text></View>
+                    <View style={{ flex:1, alignItems:"flex-end" }}><AntDesign name="play" size={ICON_SIZE} color={Color.warmgray}/></View>
                 </ImageBackground>
             </TouchableHighlight>
             <View style={styles.info__wrapper}>
@@ -41,35 +43,59 @@ const ListPhoto = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: pad*1.5,
+        marginTop: pad*0.5,
     },
     image__wrapper: {
-        margin: pad,
+        margin: pad*0.7,
         borderRadius: BORDER_RADIUS,
+        marginBottom: pad*0.4
     },
     image__photo: {
         // photo size: 3:4
         // want: 2:3, and background: black
         flex: 1,
         resizeMode: "contain",
+        flexDirection: "row",
 
-        alignItems: "center",
-        justifyContent: "center",
+        alignItems: "flex-end",
+        justifyContent: "flex-end",
         backgroundColor: "black",
         borderRadius: BORDER_RADIUS,
+        padding: BORDER_RADIUS/1.8,
+
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.4,
+        shadowRadius: 3,
+
+        elevation: 5,
     },
     info__wrapper: {
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
-        paddingHorizontal: pad*1.5,
+        paddingHorizontal: pad,
     },
     info__name: {
-        color: "white",
-        fontFamily: "noto_bold",
+        color: Color.black,
+        fontFamily: "noto_regular",
         fontSize: windowHeight / 53,
         flex: 6,
         textAlign: "center",
+        marginBottom: pad*0.4,
+
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.28,
+        shadowRadius: 3.84,
+
+        elevation: 5,
     },
 });
 
