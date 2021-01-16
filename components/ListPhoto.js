@@ -37,13 +37,20 @@ const ListPhoto = (props) => {
                 onPress={() =>
                     props.navigation.navigate(nav_where, {
                         title: props.rest_name,
+                        uri_video: props.uri_video
                     })
                 }
             >
-                <ImageBackground source={props.item} style={{ ...styles.image__photo, width: ITEM_WIDTH, height: ITEM_HEIGHT }} imageStyle={{ height: PHOTO_HEIGHT, marginTop: GAP }}>
-                    <View style={{ flex:1, paddingBottom:3 }}><Text style={{color: "white", fontSize:15, fontFamily:"noto_regular"}}>{props.video_length}</Text></View>
-                    <View style={{ flex:1, alignItems:"flex-end" }}><AntDesign name="play" size={ICON_SIZE} color={Color.warmgray}/></View>
+                {(props.item != null)?
+                <ImageBackground source={props.item} style={{ ...styles.image__photo, width: ITEM_WIDTH, height: ITEM_HEIGHT  }} imageStyle={{ height: ITEM_HEIGHT, resizeMode: "contain" }}>    
+                <View style={{ alignItems:"flex-end" }}><AntDesign name="play" size={ICON_SIZE} color={Color.warmgray}/></View>
+            </ImageBackground>
+                :
+                <ImageBackground source={props.item} style={{ ...styles.image__photo, width: ITEM_WIDTH, height: ITEM_HEIGHT  }} imageStyle={{ height: ITEM_HEIGHT, resizeMode: "contain" }}>    
+                    <View style={{ alignItems:"flex-end" }}><AntDesign name="play" size={ICON_SIZE} color={Color.warmgray}/></View>
                 </ImageBackground>
+                }
+
             </TouchableHighlight>
             <View style={styles.info__wrapper}>
                 <Text style={styles.info__name}>{props.rest_name}</Text>
@@ -59,20 +66,7 @@ const styles = StyleSheet.create({
     image__wrapper: {
         margin: pad*0.7,
         borderRadius: BORDER_RADIUS,
-        marginBottom: pad*0.4
-    },
-    image__photo: {
-        // photo size: 3:4
-        // want: 2:3, and background: black
-        flex: 1,
-        resizeMode: "contain",
-        flexDirection: "row",
-
-        alignItems: "flex-end",
-        justifyContent: "flex-end",
-        backgroundColor: "black",
-        borderRadius: BORDER_RADIUS,
-        padding: BORDER_RADIUS/1.8,
+        marginBottom: pad*0.4,
 
         shadowColor: "#000",
         shadowOffset: {
@@ -83,6 +77,19 @@ const styles = StyleSheet.create({
         shadowRadius: 3,
 
         elevation: 5,
+    },
+    image__photo: {
+        // photo size: 3:4
+        // want: 2:3, and background: black
+        flex: 1,
+        //resizeMode: "contain",
+        flexDirection: "row",
+
+        alignItems: "flex-end",
+        justifyContent: "flex-end",
+        backgroundColor: "white",
+        borderRadius: BORDER_RADIUS,
+        padding: BORDER_RADIUS/1.8,
     },
     info__wrapper: {
         flexDirection: "row",

@@ -14,9 +14,19 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const imageDatas1 = [
-    { name: "커리", photo: require("../../assets/images/thumbnail_1.png") },
-    { name: "포", photo: require("../../assets/images/thumbnail_2.png") },
-    { name: "치킨", hoto: require("../../assets/images/thumbnail_3.png") },
+    { name: "포이푸", photo: require("../../assets/images/thumbnail_1.png"), uri: "../../assets/images/gangreung_poipu.mp4" },
+    { name: "데일리 오아시스", photo: require("../../assets/images/thumbnail_2.png"), uri: "../../assets/images/songdo_dailyoasis.mp4" },
+    { name: "버거룸181", photo: require("../../assets/images/thumbnail_3.png"), uri: "../../assets/images/songdo_bugerroom.mp4" },
+];
+const imageDatas2 = [
+    { name: "풀사이드228", photo: require("../../assets/images/thumbnail_4.png"), uri: "../../assets/images/songdo_fullside.mp4" },
+    { name: "", photo: null, uri: null },
+    { name: "", photo: null, uri: null },
+];
+const imageDatas3 = [
+    { name: "", photo: null, uri: null },
+    { name: "", photo: null, uri: null },
+    { name: "", photo: null, uri: null },
 ];
 
 const SubHeader = (props) => {
@@ -34,7 +44,7 @@ const VideoList = (props) => {
             numColumns={3}
             data={props.imageDatas}
             renderItem={({ item }) => {
-                return <ListPhoto ITEM_WIDTH={windowWidth / 2.3} item={item.photo} navigation={props.navigation} rest_name={item.name}/>;
+                return <ListPhoto ITEM_WIDTH={windowWidth / 2.3} item={item.photo} navigation={props.navigation} rest_name={item.name} uri_video={item.uri}/>;
             }}
             keyExtractor={(item, index) => index.toString()}
         ></FlatList>
@@ -81,7 +91,7 @@ const YoutubeMain = (props) => {
         <ScrollView>
             <SubSection navigation={props.navigation} smallTxt={"우리 주변 숨겨진"} hashTxt={"지역맛집"} imageDatas={imageDatas1}></SubSection>
             <SubSection navigation={props.navigation} smallTxt={"매운 음식이 땡길때"} hashTxt={"매운음식 맛집"} imageDatas={imageDatas2}></SubSection>
-            <SubSection navigation={props.navigation} smallTxt={"우리 주변 숨겨진"} hashTxt={"지역맛집"} imageDatas={imageDatas3}></SubSection>
+            <SubSection navigation={props.navigation} smallTxt={"특색 있는"} hashTxt={"지역맛집"} imageDatas={imageDatas3}></SubSection>
         </ScrollView>
     );
 };

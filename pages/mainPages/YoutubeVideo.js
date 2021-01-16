@@ -14,8 +14,6 @@ import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 
-import LinearGradient from 'react-native-linear-gradient';
-
 import Color from "../../constants/Color";
 import CommonStyles from "../../constants/CommonStyle";
 
@@ -109,9 +107,7 @@ const YoutubeVideo = (props) => {
         <View style={styles.container}>
                 <VideoPlayer
                     videoProps={{
-                        source: {
-                            uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
-                        },
+                        source: require("../../assets/images/gangreung_poipu.mp4"),
                         rate: 1.0,
                         volume: 1.0,
                         isMuted: false,
