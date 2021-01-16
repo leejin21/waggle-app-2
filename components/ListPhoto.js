@@ -42,7 +42,7 @@ const ListPhoto = (props) => {
                 }
             >
                 {(props.item != null)?
-                <ImageBackground source={props.item} style={{ ...styles.image__photo, width: ITEM_WIDTH, height: ITEM_HEIGHT  }} imageStyle={{ resizeMode: "contain" }}>    
+                <ImageBackground source={props.item} style={{ ...styles.image__photo, width: ITEM_WIDTH, height: ITEM_HEIGHT }} imageStyle={{ resizeMode: "cover" }}>    
                 <View style={{ alignItems:"flex-end" }}><AntDesign name="play" size={ICON_SIZE} color={Color.warmgray}/></View>
             </ImageBackground>
                 :
