@@ -143,6 +143,7 @@ const UpdateScreens = {
 //     );
 // };
 
+/*
 const BottomTab = ({ navigation, route }) => {
     React.useLayoutEffect(() => {
         // logo header 설정해 주기
@@ -184,11 +185,12 @@ const BottomTab = ({ navigation, route }) => {
         </Tab.Navigator>
     );
 };
+*/
 
 const MainStack = () => {
     return (
         <Main.Navigator>
-            <Main.Screen name="BottomTab" component={BottomTab}></Main.Screen>
+            {/*<Main.Screen name="BottomTab" component={BottomTab}></Main.Screen>*/}
             <Main.Screen
                 name="YoutubeVideo"
                 component={YoutubeVideo}

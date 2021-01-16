@@ -1,3 +1,4 @@
+/*
 import React, { useEffect } from "react";
 import {
     View,
@@ -94,3 +95,4 @@ const LiveMain = (props) => {
 const styles = StyleSheet.create({});
 
 export default LiveMain;
+*/
