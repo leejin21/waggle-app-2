@@ -41,8 +41,8 @@ const TimeStamp = (props) => {
             <Card style={styles.timestamp}>
                 <View style={{ flexDirection: "row" }}>
                     <AntDesign
-                        name="caretright"
-                        size={font * 2}
+                        name="forward"
+                        size={font * 1.7}
                         color={Color.gray}
                     ></AntDesign>
                     <Text> </Text>
@@ -59,7 +59,7 @@ const TimeStamp = (props) => {
 const YoutubeVideo = (props) => {
     props.navigation.setOptions({
         headerTransparent: true,
-        headerBackTitleVisible: false,
+        headerBackTitleVisible: true,
         headerStyle: {
             height: windowWidth * (5/16),
         },
@@ -68,7 +68,7 @@ const YoutubeVideo = (props) => {
             fontSize: 30,
             fontFamily: "noto_bold"
         },
-        title: props.route.params.title
+        //title: props.route.params.title
     });
 
     /*useEffect(() => {
@@ -92,14 +92,10 @@ const YoutubeVideo = (props) => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.video__wrapper}>
-                {/* TODO video component: fetch from the server */}
-                {/* FIXME IOS: not working, need to eject */}
                 <VideoPlayer
                     videoProps={{
                         source: {
-                            uri:
-                                "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
+                            uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
                         },
                         rate: 1.0,
                         volume: 1.0,
@@ -113,7 +109,7 @@ const YoutubeVideo = (props) => {
                     hideControlsTimerDuration={10000000} //to be fixed
                     inFullscreen={true}
                     width={windowWidth}
-                    height={(windowHeight * 12) / 15.4} //to be fixed
+                    height={(windowHeight * 9.2) / 11.5} //to be fixed
                     //playIcon={playIcon}
                     //pauseIcon={pauseIcon}
                     //replayIcon={replayIcon}
@@ -123,16 +119,12 @@ const YoutubeVideo = (props) => {
                     showFullscreenButton={false}
                     textStyle={{ color: "grey", fontSize: 0.01 }}
                 />
-            </View>
             <View style={styles.timestamp__wrapper}>
                 {timestamp.map((item) => {return <TimeStamp key={item.id} id={item.id} name={item.name} milisec={item.milisec} setPos={setPos}></TimeStamp>})}
             </View>
-            <View style={styles.button__wrapper}>
-                <BottomButton active={true} onPress={() => props.navigation.navigate("Basket", { title: props.route.params.title })}>
-                    <Text style={{...CommonStyles.bold_text, color:"white"}}>픽하고 쿠폰받기</Text>
-                </BottomButton>
+            <View style={styles.bottombutton__wrapper}>
+                <PickCouponButton></PickCouponButton>
             </View>
-            <PickCouponButton></PickCouponButton>
         </View>
     );
 };
@@ -142,21 +134,9 @@ const styles = StyleSheet.create({
         flex: 1,
         height: "100%",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "flex-start",
     },
-    video__wrapper: {
-        flex: 12,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: Color.warmgray,
-        width: "100%",
 
-        zIndex: 0
-    },
-    button__wrapper: {
-        flex: 2,
-        width: "100%",
-    },
     header__right: {
         flexDirection: "row",
         alignItems: "center",
@@ -172,31 +152,37 @@ const styles = StyleSheet.create({
     },
 
     timestamp__wrapper: {
-        flex: 1.4,
-        backgroundColor: "transparent",
+        backgroundColor: Color.black,
         width: "100%",
+        height: windowHeight * 1.1 / 11.5,
         justifyContent: "flex-start",
         alignItems: "center",
         flexDirection: "row",
 
-        zIndex: 1,
-        position: "absolute"
+        //zIndex: 1,
+        //position: "absolute"
     },
     timestamp: {
         backgroundColor: Color.warmgray,
-        borderRadius: pad * 1.7,
+        borderRadius: pad * 1.5,
         margin: pad,
         marginRight: 0,
         padding: pad,
-        paddingRight: pad * 1.5,
+        paddingRight: pad * 1.3,
         flexDirection: "row",
         alignItems: "center",
     },
     timestamp_txt: {
         color: Color.gray,
         fontSize: font * 1.5,
-        fontFamily: "noto_bold",
+        fontFamily: "noto_regular",
+        paddingBottom: pad*2.2
     },
+
+    bottombutton__wrapper: {
+        width: windowWidth,
+        height: windowHeight * 1.2 / 11.5
+    }
 });
 
 export default YoutubeVideo;

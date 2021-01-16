@@ -21,8 +21,8 @@ const imageDatas = [
 
 const SubHeader = (props) => {
     return (
-        <View style={{width: windowWidth, height: windowHeight/12, alignItems: "flex-start", paddingLeft: 20, justifyContent: "center", backgroundColor: "white"}}>
-            <Text style={{fontFamily: "noto_regular", fontSize: 17}}>{props.smallTxt}</Text>
+        <View style={{...styles.shadow__subheader, width: windowWidth, height: windowHeight/12, alignItems: "flex-start", paddingLeft: 23, paddingTop: 2, justifyContent: "center", backgroundColor: "white"}}>
+            <Text style={{fontFamily: "noto_bold", fontSize: 17}}> {props.smallTxt}</Text>
             <Text style={{fontFamily: "noto_bold", fontSize: 24, color: "red"}}>#{props.hashTxt}</Text>
         </View>
     );
@@ -54,7 +54,7 @@ const SubSection = (props) => {
 const YoutubeMain = (props) => {
     props.navigation.setOptions({
         headerBackTitleVisible: false,
-        headerTitle: (props) => <Image style={{ width: 130, height: 130 }} source={require("../../constants/logo_white.png")} resizeMode="contain"></Image>,
+        headerTitle: (props) => <Image style={{ ...styles.logo, width: 130, height: 130 }} source={require("../../constants/logo_white.png")} resizeMode="contain"></Image>,
         headerTitleStyle: {
             flex: 1,
             textAlign: "center",
@@ -64,8 +64,15 @@ const YoutubeMain = (props) => {
             //width: windowWidth,
             height: windowWidth * (5/16),
             
-            // 밑에 줄 그인 거 없애기 위함
-            shadowColor: "transparent",
+            shadowColor: "#000",
+            shadowOffset: {
+                width: 0,
+                height: 2,
+            },
+            shadowOpacity: 0.28,
+            shadowRadius: 3.84,
+    
+            elevation: 5,
         },
         //headerRight: () => <ProfileLogo touchable={true} navigation={props.navigation} style={{ marginRight: pad*1.2 }}></ProfileLogo>,
     });
@@ -80,6 +87,30 @@ const YoutubeMain = (props) => {
 };
 
 const styles = StyleSheet.create({
+    shadow__subheader: {
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.45,
+        shadowRadius: 4.5,
+
+        elevation: 5,
+    },
+    logo: {
+        marginLeft: 18, 
+
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.28,
+        shadowRadius: 3.84,
+
+        elevation: 5,
+    }
 });
 
 export default YoutubeMain;
