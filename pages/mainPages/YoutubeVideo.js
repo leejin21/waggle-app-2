@@ -59,6 +59,8 @@ const TimeStamp = (props) => {
 };
 
 const Header = (props) => {
+    const length = props.title.length;
+
     return (
         <TouchableOpacity style={styles.header} activeOpacity={1}>
             <Card style={{ borderRadius: pad*2, backgroundColor: Color.warmgray, opacity: 0.75}}>
@@ -66,7 +68,7 @@ const Header = (props) => {
                     <AntDesign name="left" size={font * 1.9} color={Color.white} style={styles.header__left}></AntDesign>
                 </View>
                 <View>
-                    <Text style={styles.header__txt}>{props.title}</Text>
+                    <Text style={{...styles.header__txt, left: 135-length*7, top: -14 }}>{props.title}</Text>
                 </View>
             </Card>
         </TouchableOpacity>
@@ -83,13 +85,6 @@ const YoutubeVideo = (props) => {
         },
         headerLeft: () => {null},
     });
-
-    /*useEffect(() => {
-        props.navigation.setOptions({
-            ...VideoOptions,
-            title: props.route.params.title,
-        });
-    }, []);*/
 
     const [pos, setPos] = useState(0);
 
@@ -164,8 +159,7 @@ const styles = StyleSheet.create({
         fontSize: 29,
 
         position: "absolute",
-        left: 135,
-        top: -14
+        
     },
 
     container: {
