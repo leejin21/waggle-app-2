@@ -1,12 +1,14 @@
 {
-  "name": "waggle2",
-  "displayName": "waggle2",
-  "expo": {
     "name": "waggle2",
-    "slug": "waggle2",
-    "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
-  }
+    "displayName": "waggle2",
+    "expo": {
+        "name": "waggle2",
+        "slug": "waggle2",
+        "version": "1.0.0",
+        "assetBundlePatterns": ["**/*"],
+        "splash": {
+            "image": "./assets/images/logo_full.png",
+            "backgroundColor": "#fbbd0d"
+        }
+    }
 }

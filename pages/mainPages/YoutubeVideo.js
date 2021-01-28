@@ -5,6 +5,7 @@ import {
     StyleSheet,
     TouchableOpacity,
     Dimensions,
+    Touchable,
 } from "react-native";
 import VideoPlayer from "expo-video-player";
 
@@ -25,9 +26,29 @@ const windowHeight = Dimensions.get("window").height;
 const pad = windowHeight / 60; //10
 const font = windowHeight / 65;
 
+function isInteger(str) {
+    return !isNaN(str) && Number.isInteger(parseFloat(str));
+}
+
+const getTextLength = (str) => {
+    let len = 0.0;
+    for (let i = 0; i < str.length; i++) {
+        if (escape(str.charAt(i)).length == 6) {
+            len = len + 2;
+        } else if (isInteger(str.charAt(i))) {
+            len = len + 1.3;
+        } else {
+            len = len + 0.5;
+        }
+    }
+    return len;
+};
+
 const timestamp = [
-    { id: 0, name: "주변관경", milisec: 3000 },
-    { id: 1, name: "인테리어", milisec: 8000 },
+    { id: 0, name: "주변관경", milisec: 5900 },
+    { id: 1, name: "인테리어", milisec: 16000 },
+    { id: 2, name: "메뉴", milisec: 40000 },
+    { id: 3, name: "먹방", milisec: 90000 },
 ];
 const TimeStamp = (props) => {
     const handleClick = () => {
@@ -35,18 +56,67 @@ const TimeStamp = (props) => {
     };
 
     return (
-        <TouchableOpacity onPress={() => handleClick()}>
+        <TouchableOpacity activeOpacity={0.43} onPress={() => handleClick()}>
             <Card style={styles.timestamp}>
                 <View style={{ flexDirection: "row" }}>
                     <AntDesign
-                        name="caretright"
-                        size={font * 2}
+                        name="forward"
+                        size={font * 1.7}
                         color={Color.gray}
+                        style={styles.shadow__txt}
                     ></AntDesign>
                     <Text> </Text>
                 </View>
                 <View>
-                    <Text style={styles.timestamp_txt}>{props.name}</Text>
+                    <Text
+                        style={{
+                            ...styles.timestamp_txt,
+                            ...styles.shadow__txt,
+                        }}
+                    >
+                        {props.name}
+                    </Text>
+                </View>
+            </Card>
+        </TouchableOpacity>
+    );
+};
+
+const Header = (props) => {
+    const a = -13 * getTextLength(props.title);
+    const text_margin_left = (a + 320) / 2;
+    // 18.6: 35, 14: 70
+    useEffect(() => {
+        console.log(props.title);
+        console.log(getTextLength(props.title));
+        console.log(text_margin_left);
+    });
+    return (
+        <TouchableOpacity style={styles.header} activeOpacity={1}>
+            <Card
+                style={{
+                    borderRadius: pad * 2,
+                    backgroundColor: Color.warmgray,
+                    opacity: 0.75,
+                }}
+            >
+                <TouchableOpacity onPress={() => props.navigation.goBack()}>
+                    <AntDesign
+                        name="left"
+                        size={font * 1.9}
+                        color="white"
+                        style={styles.header__left}
+                    ></AntDesign>
+                </TouchableOpacity>
+                <View>
+                    <Text
+                        style={{
+                            ...styles.header__txt,
+                            marginLeft: text_margin_left,
+                        }}
+                    >
+                        {props.title}
+                    </Text>
                 </View>
             </Card>
         </TouchableOpacity>
@@ -57,33 +127,30 @@ const TimeStamp = (props) => {
 const YoutubeVideo = (props) => {
     useEffect(() => {
         props.navigation.setOptions({
-            ...VideoOptions,
-            title: props.route.params.title,
+            headerTransparent: true,
+            headerBackTitleVisible: false,
+            headerStyle: {
+                height: 0,
+            },
+            headerLeft: () => {
+                null;
+            },
         });
     }, []);
 
     const [pos, setPos] = useState(0);
 
-    const playIcon = () => {
-        return <FontAwesome name="play" size={font * 5} color="white" />;
-    };
-    const pauseIcon = () => {
-        return <FontAwesome name="pause" size={font * 5} color="white" />;
-    };
-    const replayIcon = () => {
-        return <MaterialIcons name="replay" size={font * 5} color="white" />;
-    };
-
     return (
-        <View style={styles.container}>
-            <View style={styles.video__wrapper}>
-                {/* TODO video component: fetch from the server */}
-                {/* FIXME IOS: not working, need to eject */}
+        <>
+            <Header
+                title={props.route.params.title}
+                navigation={props.navigation}
+            ></Header>
+            <View style={styles.container}>
                 <VideoPlayer
                     videoProps={{
                         source: {
-                            uri:
-                                "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
+                            uri: props.route.params.uri_video,
                         },
                         rate: 1.0,
                         volume: 1.0,
@@ -97,89 +164,145 @@ const YoutubeVideo = (props) => {
                     hideControlsTimerDuration={10000000} //to be fixed
                     inFullscreen={true}
                     width={windowWidth}
-                    height={(windowHeight * 12) / 15.4} //to be fixed
+                    height={(windowHeight * 9.2) / 11.5} //to be fixed
                     //playIcon={playIcon}
                     //pauseIcon={pauseIcon}
                     //replayIcon={replayIcon}
-                    videoBackground="grey"
+                    videoBackground="transparent"
                     //showControlsOnLoad={true}
                     sliderColor={Color.yellow}
                     showFullscreenButton={false}
                     textStyle={{ color: "grey", fontSize: 0.01 }}
                 />
+                <View style={styles.timestamp__wrapper}>
+                    {timestamp.map((item) => {
+                        return (
+                            <TimeStamp
+                                key={item.id}
+                                id={item.id}
+                                name={item.name}
+                                milisec={item.milisec}
+                                setPos={setPos}
+                            ></TimeStamp>
+                        );
+                    })}
+                </View>
+                <View style={styles.bottombutton__wrapper}>
+                    <PickCouponButton></PickCouponButton>
+                </View>
             </View>
-            <View style={styles.timestamp__wrapper}>
-                {timestamp.map((item) => {
-                    return (
-                        <TimeStamp
-                            key={item.id}
-                            id={item.id}
-                            name={item.name}
-                            milisec={item.milisec}
-                            setPos={setPos}
-                        ></TimeStamp>
-                    );
-                })}
-            </View>
-            <PickCouponButton></PickCouponButton>
-        </View>
+        </>
     );
 };
 
 const styles = StyleSheet.create({
+    header: {
+        zIndex: 1,
+        position: "absolute",
+        height: windowHeight / 10,
+        width: (windowWidth * 9.9) / 10,
+
+        right: (windowWidth * 0.05) / 10,
+        bottom: windowHeight * 0.86,
+    },
+    header__left: {
+        // position: "absolute",
+        // left: -13,
+        // top: -5,
+        marginTop: -7,
+        marginStart: -20,
+
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.7,
+        shadowRadius: 2,
+
+        elevation: 5,
+    },
+    header__txt: {
+        fontFamily: "noto_bold",
+        fontSize: 29,
+        marginTop: -30,
+        marginLeft: 20,
+
+        // position: "absolute",
+        // left: 75,
+        // top: -14,
+    },
+
     container: {
         flex: 1,
         height: "100%",
         alignItems: "center",
-        justifyContent: "center",
-    },
-    video__wrapper: {
-        flex: 12,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: Color.warmgray,
-        width: "100%",
-    },
-    button__wrapper: {
-        flex: 2,
-        width: "100%",
-    },
-    header__right: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        marginRight: pad * 0.5,
-    },
-    heart_icon: {
-        margin: pad * 0.5,
-    },
-    more_icon: {
-        margin: pad * 0.5,
-        borderRadius: 15,
+        justifyContent: "flex-start",
     },
 
     timestamp__wrapper: {
-        flex: 1.4,
-        backgroundColor: "transparent",
+        backgroundColor: Color.warmgray,
         width: "100%",
+        height: (windowHeight * 1.1) / 11.5,
         justifyContent: "flex-start",
         alignItems: "center",
         flexDirection: "row",
+
+        shadowColor: Color.warmgray,
+        shadowOffset: {
+            width: 0,
+            height: -3,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 5,
+
+        elevation: 0,
+
+        //zIndex: 1,
+        //position: "absolute"
     },
     timestamp: {
         backgroundColor: Color.warmgray,
-        borderRadius: pad * 1.7,
+        borderRadius: pad * 1.5,
         margin: pad,
         marginRight: 0,
         padding: pad,
-        paddingRight: pad * 1.5,
+        paddingRight: pad * 1.3,
         flexDirection: "row",
         alignItems: "center",
+
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+
+        elevation: 5,
     },
     timestamp_txt: {
         color: Color.gray,
         fontSize: font * 1.5,
-        fontFamily: "noto_bold",
+        fontFamily: "noto_regular",
+        paddingBottom: pad * 2.2,
+    },
+
+    bottombutton__wrapper: {
+        width: windowWidth,
+        height: (windowHeight * 1.2) / 11.5,
+    },
+
+    shadow__txt: {
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.18,
+        shadowRadius: 1.2,
+
+        elevation: 5,
     },
 });
 

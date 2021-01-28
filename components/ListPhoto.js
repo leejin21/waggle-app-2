@@ -9,6 +9,8 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
+import Color from "../constants/Color";
+
 const windowHeight = Dimensions.get("window").height;
 const pad = windowHeight / 80;
 
@@ -34,6 +36,7 @@ const ListPhoto = (props) => {
                 onPress={() =>
                     props.navigation.navigate(nav_where, {
                         title: props.rest_name,
+                        uri_video: props.uri_video,
                     })
                 }
             >
@@ -46,11 +49,13 @@ const ListPhoto = (props) => {
                     }}
                     imageStyle={{ borderRadius: BORDER_RADIUS }}
                 >
-                    <AntDesign
-                        name="caretright"
-                        size={ICON_SIZE}
-                        color={"white"}
-                    />
+                    <View style={{ alignItems: "flex-end" }}>
+                        <AntDesign
+                            name="play"
+                            size={ICON_SIZE}
+                            color={Color.warmgray}
+                        />
+                    </View>
                 </ImageBackground>
             </TouchableHighlight>
             <View style={styles.info__wrapper}>
@@ -72,11 +77,13 @@ const styles = StyleSheet.create({
         // photo size: 3:4
         // want: 2:3, and background: black
         flex: 1,
+        flexDirection: "row",
         resizeMode: "cover",
-        alignItems: "center",
-        justifyContent: "center",
+        alignItems: "flex-end",
+        justifyContent: "flex-end",
         backgroundColor: "black",
         borderRadius: BORDER_RADIUS,
+        padding: BORDER_RADIUS / 1.8,
     },
     info__wrapper: {
         flexDirection: "row",

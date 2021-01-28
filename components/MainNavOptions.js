@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, Image } from "react-native";
+import { Dimensions, Image, StyleSheet } from "react-native";
 
 import Color from "../constants/Color";
 
@@ -9,7 +9,7 @@ export default {
     headerBackTitleVisible: false,
     headerTitle: (props) => (
         <Image
-            style={{ width: 130, height: 130 }}
+            style={{ ...styles.logo, width: 130, height: 130 }}
             source={require("../constants/logo_white.png")}
             resizeMode="contain"
         ></Image>
@@ -23,8 +23,32 @@ export default {
         //width: windowWidth,
         height: windowWidth * (5 / 16),
 
-        // 밑에 줄 그인 거 없애기 위함
-        shadowColor: "transparent",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.28,
+        shadowRadius: 3.84,
+
+        elevation: 5,
     },
     //headerRight: () => <ProfileLogo touchable={true} navigation={props.navigation} style={{ marginRight: pad*1.2 }}></ProfileLogo>,
 };
+
+const styles = StyleSheet.create({
+    logo: {
+        marginLeft: 18,
+        marginBottom: 10,
+
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.28,
+        shadowRadius: 3.84,
+
+        // elevation: 5,
+    },
+});

@@ -41,7 +41,7 @@ const font = windowHeight / 87;
 
 const Auth = createStackNavigator();
 // const App = createStackNavigator();
-const YoutubeStack = createStackNavigator();
+// const YoutubeStack = createStackNavigator();
 const Main = createStackNavigator();
 const Tab = createBottomTabNavigator();
 /////////////////////////////////////////////////////////////////////////////////////

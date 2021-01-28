@@ -28,6 +28,7 @@ const VideoList = (props) => {
                         item={item.photo}
                         navigation={props.navigation}
                         rest_name={item.name}
+                        uri_video={item.uri}
                         live={props.live}
                         key={item.id}
                     />
